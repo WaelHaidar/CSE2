@@ -1,6 +1,6 @@
 //Wael Haidar
 //Lab 1: HelloWorld 27/8/14 12:18
-//CSE2
+//CSE2 Section 112 CRN 48811
 
 public class HelloWorld{
     public static void main(String[] args){
