@@ -18,4 +18,4 @@ public class WelcomeMessage {
         System.out.println("It was amazing! I love Lehigh <3" );
         }
         
-    }
+    } 
