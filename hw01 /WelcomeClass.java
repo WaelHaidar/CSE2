@@ -2,7 +2,7 @@
 //hw01: Welcome Message 27/8/14 12:40 pm 
 //CSE2 Section 112 CRN 48811
 
-public class WelcomeMessage {
+public class WelcomeClass {
 
     public static void main(String[] args){
         
