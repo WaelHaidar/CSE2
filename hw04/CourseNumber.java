@@ -12,40 +12,42 @@ import java.util.Scanner;//allow us to use the scanner utility from the java lib
 public class CourseNumber{
     			// main method required for every Java program
    		    public static void main(String[] args) {
-   		        Scanner myScanner;
+   		        Scanner myScanner;//declare an instance of the scanner object
    			    myScanner = new Scanner( System.in );//call the Scanner constructor
    			    System.out.print("Enter a six digit number giving the course semester: ");
    			    //print the command for the user to respond to with the required input
-   			    if(!myScanner.hasNextInt())
+   			    if(!myScanner.hasNextInt())//check if the user inputed an int
                     { System.out.println("You did not enter an int");
                     return;    //leaves the program, i.e.
                     //the program terminates 
    		        	}
    		        int CourseNumber = myScanner.nextInt();//accept the user's input and stores it as an int
-   			    if(CourseNumber <=186510 || CourseNumber >=201440)
+   			    if(CourseNumber <=186510 || CourseNumber >=201440)//set the accepted range of inputs
                     {System.out.println("The number was outside the range [186510,201440]");
                     return;
                     }
-                int year= (int)(CourseNumber/100);
-                int Semester = CourseNumber %100;
+                int year= (int)(CourseNumber/100);//get the year out of the input
+                int Semester = CourseNumber %100;//get the semester out of the input
+                //below code check which semester is the one inputed by comparing it to the descriptions
                 if (Semester==10)
                     {System.out.println ("The course was offered in the spring semester of "+(year));
-                    return;
+                    return;//leaves the program
                     }
                 if (Semester==20)
                     {System.out.println ("The course was offered in the summer 1 semester of "+(year));
-                    return;
+                    return;//leaves the program
                     }
                 if (Semester==30)
                     {System.out.println ("The course was offered in the summer 2 semester of "+(year));
-                    return;
+                    return;//leaves the program
                     }
                 if (Semester==40)
                     {System.out.println ("The course was offered in the fall semester of "+(year));
-                    return;
+                    return;//leaves the program
                     }
+                    //if the input is non of the description the program prints out an error message
                     else {System.out.println ((Semester)+" is not a legitimate semester");
-                    return;
+                    return;//leaves the program
                     }
                     
    		    }
