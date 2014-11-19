@@ -2,40 +2,48 @@
 //hw10:HW08 11/15/14 7:38 pm
 //CSE2 Section 112 CRN 48811
 
-import java.util.Random;
+//In the program the method showOneHand() should generate random poker hands, prompting the user
+//if they would like another hand to be generated (it will repeat as long the
+//user desires). The method simulateOdds() should randomly generate 10000 hands
+//and count the number of times that a hand with a pair of a specific rank occurs,
+//along with the number of hands that do not have a pair
+
+import java.util.Random; //calls the utilities from the library
 import java.util.Scanner;
 public class PokerOdds {
     public static void main(String[] arg) {
-        showHands();
-        simulateOdds();
+        showHands(); //calls the method showHands
+        simulateOdds(); //calls the method simulateOdds
     }
     public static void showHands() {
-        String answer = "";
+        String answer = ""; //initiate the string variable answer
         Scanner scan = new Scanner(System.in);
         do {
             Random Number = new Random(); // Keep this stored as a field
-            String[] suits = {
+            String[] suits = { //initiate the string array
                 "Spades", "Clubs", "Hearts", "Diamonds"
             };
-            String[] values = {
+            String[] values = { //initiate the string array
                 "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
             };
-            int[] fullCards = new int[52];
+            int[] fullCards = new int[52]; //gives a place in memory for the int array 
             for (int c = 0; c < fullCards.length; c++) {
-                fullCards[c] = c;
+                fullCards[c] = c; //construct the values of the array fullCards
             }
-            int[] hand = {
+            int[] hand = { //initiate the int array hand 
                 -1, -1, -1, -1, -1
             };
-            for (int change = 0; change < 5; change++) {
-                int card = (int)(((fullCards.length) - change) * Math.random());
-                hand[change] = fullCards[card];
+            for (int change = 0; change < 5; change++) { //switch each randomly chosen value from
+                //the array fullCards with a value from the array hand
+                int card = (int)(((fullCards.length) - change) * Math.random()); //randomly choosing a location in tha array
+                hand[change] = fullCards[card]; //assign the value 
                 for (int m = card; m < 51 - change; m++) {
                     fullCards[m] = fullCards[m + 1];
                 }
-                fullCards[51 - change] = -1;
+                fullCards[51 - change] = -1; //switch the used value to -1
             }
-            for (int u = 0; u < suits.length; u++) {
+            for (int u = 0; u < suits.length; u++) { //the following uses the random number that we obtained
+                //and change it to the value from the value array 
                 System.out.print(suits[u] + ": ");
                 for (int nhand = 0; nhand < 5; nhand++) {
                     if (hand[nhand] / 13 == u) {
@@ -44,33 +52,27 @@ public class PokerOdds {
                 }
                 System.out.println("");
             }
-            System.out.print("Go again? Enter 'y' or 'Y', anything else to quit- ");
-            answer = scan.next();
+            System.out.print("Go again? Enter 'y' or 'Y', anything else to quit- "); //prompts the user to reply
+            answer = scan.next(); //register the user's answer 
         }
-        while (answer.equals("Y") || answer.equals("y"));
+        while (answer.equals("Y") || answer.equals("y")); //repeats the do statements if the answer is Y or y
     }
     public static void simulateOdds() {
         System.out.println("");
-        String[] cards = {
+        String[] cards = { //initaite the string array cards 
             "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
         };
-        //int L=0;
-        // int [] number= {1,2,3,4,5,6,7,8,9,10,11,12,13};
+        //the following initiate int variables to be used later 
         int noPair = 0;
         int nAce = 0, nQueen = 0, nKing = 0, nJack = 0, nTwo = 0, nThree = 0, nFour = 0, nFive = 0, nSix = 0,
             nSeven = 0, nEight = 0, nNine = 0, nTen = 0;
-        String[] hand = new String[5];
-        //int[] result= {0,0,0,0,0,0,0,0,0,0,0,0,0};
-        for (int i = 0; i < 10000; i++) {
-            for (int x = 0; x < 5; x++) {
+        String[] hand = new String[5]; //assign a memory size for the array hand 
+        for (int i = 0; i < 10000; i++) { //allow the repitition 10000 times 
+            for (int x = 0; x < 5; x++) { //construct the pocker hand with random choosing from the array
                 String y = (cards[new Random().nextInt(cards.length)]);
-                hand[x] = y;
+                hand[x] = y; //assign each value in the array
             }
-            /*for (int n = 0; n < hand.length; n++) {
-                System.out.print(hand[n]); 
-                System.out.println ("");
-            }*/
-            int a = 0;
+            int a = 0; //the following checks for duplicates in the hand and adds one to "a" if a duplicate is found
             for (int w = 0; w < hand.length; w++) {
                 for (int e = w + 1; e < hand.length; e++) {
                     if (hand[w] == hand[e]) {
@@ -78,29 +80,13 @@ public class PokerOdds {
                     }
                 }
             }
-            if (a == 1) {
-                for (int z = 0; z < hand.length; z++) {
+            if (a == 1) { //if the number of duplicates is one the following code runs 
+                for (int z = 0; z < hand.length; z++) { //this looks for the duplicate cards
                     for (int j = z + 1; j < hand.length; j++) {
-                        /*System.out.println (hand [j] + " " + hand [z] );*/
                         if (hand[j] == hand[z]) {
-                            
-                            // L = hand[z]%13;
-                            /*result[L]+=1;
-                            if(hand[j]== "A") nAce++;
-                            if(hand[j]== "K") nKing++;
-                            if(hand[j]== "Q") nQueen++;
-                            if(hand[j]== "J") nJack++;
-                            if(hand[j]== "2") nTwo++;
-                            if(hand[j]== "3") nThree++;
-                            if(hand[j]== "4") nFour++;
-                            if(hand[j]== "5") nFive++;
-                            if(hand[j]== "6") nSix++;
-                            if(hand[j]== "7") nSeven++;
-                            if(hand[j]== "8") nEight++;
-                            if(hand[j]== "9") nNine++;
-                            if(hand[j]== "10") nTen++;*/
-                            
-                            switch (hand[j]) {
+
+                            switch (hand[j]) { //this switch statements check what kind of card is duplicated 
+                                //and adds one to the correct kind
                                 case "A":
                                     nAce++;
                                     break;
@@ -147,17 +133,13 @@ public class PokerOdds {
 
                 }
             }
-            else {
+            else { //if the number of duplicates is more than one it adds one to the noPair variable 
                 noPair++;
 
             }
-            /* hand[0]=null;
-             hand[1]=null;
-             hand[2]=null;
-             hand[3]=null;
-             hand[4]=null;*/
             a = 0;
         }
+        //the following prints out the results 
         System.out.println("Rank   Freq of exactly one pair");
         System.out.println(" A       " + nAce);
         System.out.println(" K       " + nKing);
